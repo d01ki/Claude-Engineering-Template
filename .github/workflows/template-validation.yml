@@ -1,0 +1,42 @@
+name: Template validation
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-template:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Verify required template files and valid JSON
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          required = [
+              "CLAUDE.md",
+              ".claude/settings.json",
+              ".claude/rules/security.md",
+              ".claude/agents/security-reviewer.md",
+              ".claude/skills/implement-feature/SKILL.md",
+              "docs/requirements.md",
+              "docs/architecture.md",
+              "docs/threat-model.md",
+          ]
+          missing = [path for path in required if not Path(path).is_file()]
+          if missing:
+              raise SystemExit(f"Missing required files: {missing}")
+          for path in Path(".").rglob("*.json"):
+              if ".git" not in path.parts:
+                  json.loads(path.read_text(encoding="utf-8"))
+          print("Template structure and JSON: OK")
+          PY
