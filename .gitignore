@@ -1,0 +1,31 @@
+# Claude Code local
+.claude/settings.local.json
+.claude/*.local.md
+
+# Credentials
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*private_key*
+
+# Python/JS/tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+node_modules/
+dist/
+build/
+coverage/
+.cache/
+
+# Editors/OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
