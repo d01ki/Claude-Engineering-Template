@@ -1,6 +1,4 @@
-<div align="center">
-
-# ⚡ Claude Engineering Template
+# Claude Engineering Template
 
 ### Context-aware · Verification-first · Guardrail-driven
 
@@ -8,16 +6,12 @@
 
 [![Template validation](https://github.com/d01ki/Claude-Engineering-Template/actions/workflows/template-validation.yml/badge.svg)](https://github.com/d01ki/Claude-Engineering-Template/actions/workflows/template-validation.yml)
 [![Security baseline](https://github.com/d01ki/Claude-Engineering-Template/actions/workflows/security-checks.yml/badge.svg)](https://github.com/d01ki/Claude-Engineering-Template/actions/workflows/security-checks.yml)
-![Claude Code](https://img.shields.io/badge/Claude_Code-Engineering-D97757?style=flat-square)
-![Autonomy](https://img.shields.io/badge/Default_Autonomy-L2-2563EB?style=flat-square)
 
 **[Architecture](#-architecture) · [Features](#-capabilities) · [Quick start](#-quick-start) · [Existing projects](#-adopting-in-an-existing-project) · [Safety](#-security--limitations)**
 
-</div>
-
 ---
 
-## ✦ Philosophy
+## Philosophy
 
 > **Autonomy is earned through verification, not granted through prompts.**
 
@@ -25,11 +19,11 @@ This template structures the development loop around **clear context → bounded
 
 It is a **stack-agnostic starter**, not an executable application, official Anthropic template, certification material, or guarantee of security. Its architecture is inspired by general context engineering and verification-first agent development practices.
 
-## 🧠 Architecture
+## Architecture
 
 ```mermaid
 flowchart TB
-    H(["👤 HUMAN<br/>Goals · Acceptance criteria · Risk budget"])
+    H(["HUMAN<br/>Goals · Acceptance criteria · Risk budget"])
     subgraph CTX["01 / CONTEXT ENGINEERING"]
       direction LR
       C["CLAUDE.md<br/>Working agreement"]
@@ -38,26 +32,26 @@ flowchart TB
     end
     subgraph ORCH["02 / ORCHESTRATION"]
       direction LR
-      P["🧭 Coordinator<br/>Plan · Scope · Integrate"]
-      A["🏗️ Architect<br/>Design review"]
-      I["⚙️ Implementer<br/>Bounded edits"]
-      S["🛡️ Reviewers<br/>Code · Security"]
+      P["Coordinator<br/>Plan · Scope · Integrate"]
+      A["Architect<br/>Design review"]
+      I["Implementer<br/>Bounded edits"]
+      S["Reviewers<br/>Code · Security"]
     end
     subgraph LOOP["03 / VERIFICATION LOOP"]
       direction LR
       W["Change"]
-      V{"🔍 Checks pass?"}
-      F["🧪 Root cause<br/>Regression test"]
-      Q["📋 Review<br/>Evidence + risk"]
+      V{"Checks pass?"}
+      F["Root cause<br/>Regression test"]
+      Q["Review<br/>Evidence + risk"]
       W --> V
       V -->|No| F
       F --> W
       V -->|Yes| Q
     end
-    G{"🔐 External action<br/>or elevated risk?"}
-    APPROVE["👤 Human approval"]
-    DONE(["📦 Delivery + verification report"])
-    LEARN["🔁 Reflect<br/>Propose tests · rules · skills"]
+    G{"External action<br/>or elevated risk?"}
+    APPROVE["Human approval"]
+    DONE(["Delivery + verification report"])
+    LEARN["Reflect<br/>Propose tests · rules · skills"]
     H --> CTX
     CTX --> P
     P -.-> A
@@ -88,7 +82,7 @@ flowchart TB
 
 **Key principle:** The coordinator owns integration and final verification. Specialist agents are optional, scoped, and never a substitute for real tests or human approval.
 
-## 🚀 Capabilities
+## Capabilities
 
 | Layer | Included | Why it exists |
 | :-- | :-- | :-- |
@@ -100,7 +94,7 @@ flowchart TB
 | **Guardrails** | Permission configuration, approval policy, CI baseline | Defense in depth, not prompt-only security |
 | **Feedback** | Verification → correction → reflection | Turn confirmed failures into preventive controls |
 
-### 🧩 Agent responsibilities
+### Agent responsibilities
 
 ```mermaid
 flowchart LR
@@ -124,7 +118,7 @@ flowchart LR
 
 **Avoid unnecessary parallelism.** Delegate only when a task has clear boundaries and an independent review or isolated context is valuable.
 
-### 🛠️ Available skills
+### Available skills
 
 | Skill | Purpose |
 | :-- | :-- |
@@ -137,7 +131,7 @@ flowchart LR
 
 Skill discovery and invocation depend on your installed Claude Code version. All bundled skills are designed for explicit invocation.
 
-## 🔐 Autonomy & guardrails
+## Autonomy & guardrails
 
 **Default: L2.** Agents may make scoped local edits and run safe checks, but external actions require approval.
 
@@ -182,7 +176,7 @@ flowchart LR
 
 **Guardrails are layered:** prompt guidance + scoped tools + sandboxing + tests + CI + branch protection + human review. Neither `CLAUDE.md` nor a passing CI badge proves security.
 
-## ⚡ Quick start
+## Quick start
 
 1. Enable **Template repository** in GitHub **Settings → General**, then select **Use this template → Create a new repository**.
 2. Clone your new repository and launch Claude Code from its root.
@@ -201,7 +195,7 @@ verification commands and unresolved assumptions.
 Do not deploy, push or merge without explicit approval.
 ```
 
-## 🔄 Adopting in an existing project
+## Adopting in an existing project
 
 **Do not copy this repository over an existing codebase.** Adapt the policies to the current stack and preserve existing application code, tests and CI.
 
@@ -211,7 +205,7 @@ Do not deploy, push or merge without explicit approval.
 4. Add verified commands to `CLAUDE.md` and integrate checks into the existing CI.
 5. Introduce the changes in a separate branch and review the diff.
 
-## 🗂️ Repository structure
+## Repository structure
 
 ```text
 .
@@ -263,7 +257,7 @@ Do not deploy, push or merge without explicit approval.
 └── SECURITY.md
 ```
 
-## 🛡️ Security & limitations
+## Security & limitations
 
 - `.claude/settings.json` provides conservative permission settings, **not an isolation boundary**. Use least-privilege credentials and sandboxing.
 - `.mcp.json` is intentionally empty; no external MCP servers are enabled.
@@ -273,7 +267,7 @@ Do not deploy, push or merge without explicit approval.
 - Neither workflow tests application logic. Add real tests, scanning and required branch protection for production.
 - No automatic merging, deployment, secret access or cloud spending is configured.
 
-## 📚 Design references
+## Design references
 
 - [Claude Code overview](https://code.claude.com/docs/en/overview)
 - [Claude Code settings](https://code.claude.com/docs/en/settings)
@@ -287,14 +281,7 @@ Do not deploy, push or merge without explicit approval.
 
 The ideas here are original, Claude Code-oriented adaptations of broader agent engineering practices, not a reproduction or endorsement by those authors. The latter two articles were not independently retrievable during the v2 update; this README does not attribute specific technical claims to them.
 
-## 🤝 Contributing
+## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md). A license has not yet been selected; choose one before encouraging unrestricted reuse.
 
----
-
-<div align="center">
-
-**Build deliberately. Verify continuously. Automate responsibly.**
-
-</div>
