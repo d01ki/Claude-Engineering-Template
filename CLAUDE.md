@@ -52,3 +52,11 @@ This template intentionally contains no runnable application. Once a stack is ch
 - Documentation updated where needed
 - No secrets or unrelated edits
 - Concise verification report
+
+## Agent Engineering v2
+- Default autonomy is L2: local scoped edits and safe verification; human reviews before external publication.
+- Read `.claude/rules/autonomy.md` and `.claude/rules/context-management.md` for delegation and context policy.
+- For bounded implementation tasks, optionally use the `implementer` subagent; coordinator owns integration.
+- Use `/verify-change` for evidence-based checks, `/root-cause-analysis` for recurring failures, and `/reflect` to propose reusable lessons.
+- See `docs/agent-engineering/` for orchestration, guardrails and autonomy policy.
+- Do not assume the included security CI is a complete secret scanner or application security test.
