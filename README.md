@@ -85,3 +85,35 @@ The included GitHub Actions workflow validates template structure and JSON synta
 ## License and contribution
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md). Choose a license before broad external reuse.
+
+## Agent Engineering v2: Guardrails and learning loops
+
+This template now includes an optional scoped **implementer** agent, **context-management** and **autonomy** rules, and three additional opt-in skills: `/verify-change`, `/root-cause-analysis`, and `/reflect`. The default operating mode remains **L2**: bounded local edits and verification, with human approval for pushing, merging, deploying or other external side effects.
+
+```mermaid
+flowchart TD
+    Goal[Human goal and acceptance criteria] --> Plan[Coordinator plans and bounds task]
+    Plan --> Implement[Main agent or scoped implementer]
+    Implement --> Verify[Tests / lint / types / security checks]
+    Verify -->|Fail| Correct[Root cause and regression test]
+    Correct --> Implement
+    Verify -->|Pass| Review[Independent review if needed]
+    Review --> Approval{External action?}
+    Approval -->|Yes| Human[Human approval]
+    Approval -->|No| Report[Report evidence]
+    Human --> Report
+    Report -.-> Reflect[Propose reusable lesson]
+```
+
+Read [orchestration](docs/agent-engineering/orchestration.md), [autonomy levels](docs/agent-engineering/autonomy-levels.md), [guardrails](docs/agent-engineering/guardrails.md), and [lessons learned](docs/agent-engineering/lessons-learned.md). The added `security-checks.yml` checks tracked sensitive *filenames* only; it is not a content-based secret scanner or substitute for application tests.
+
+### Inspiration and attribution
+
+These are original, Claude Code-oriented adaptations of general verification-first agent engineering ideas, not a reproduction of pstack or an official Anthropic template.
+
+- [Lauren Tan / Cursor pstack](https://github.com/cursor/plugins/blob/main/pstack/README.md)
+- [Yasuhito Morimoto: Lauren Tan's agent workflows](https://note.com/yasuhitoo/n/n181c64973748)
+- [Additional discussion: AI Setouchi](https://ai-setouchi.com/articles/lauren-tan-agent-guardrails)
+- [Additional discussion: BigGo](https://finance.biggo.jp/news/e075716ae1e521f9)
+
+The latter two linked articles were not independently retrievable during this update; no specific claims are attributed to their text.
